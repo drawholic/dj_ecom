@@ -63,7 +63,7 @@ class CartView(generics.ListCreateAPIView):
 
         for order in user.order_set.all():
             products.append(Product.objects.get(id=order.product.id))
-        print(products)
+
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
