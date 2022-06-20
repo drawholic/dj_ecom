@@ -2,3 +2,4 @@ back/env/
 env/
 front/node_modules/
 back/project/db.sqlite3
+back/project/db.sqlite3
