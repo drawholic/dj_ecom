@@ -1,0 +1,72 @@
+.App {
+  text-align: center;
+}
+
+
+.input{
+	margin:10px;
+	width:400px;
+	height:30px;
+	font-size:25px
+}
+
+.submit{
+	width:200px;
+	height:70px;
+	font-size:20px;
+	border:none;
+	background: #a388d3;
+	color:white;
+	border-radius:10px
+}
+.submit:active{
+	background:#725f93	
+}
+.form{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	margin:150px	
+}
+
+ul{
+	list-style: none;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+	align-items:start
+}
+
+a{
+	color:black;
+	text-decoration:none;
+	font-size:20px
+}
+li{
+	margin-bottom:20px;
+	display:flex;
+	flex-direction:flex-start;
+	margin-right:30px
+}
+a:hover{
+	text-decoration:underline
+}
+a:active{
+	text-decoration:none	
+}
+
+nav{
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between
+}
+.profile-header{
+	display:flex
+}
+
+
+
+
+
+
