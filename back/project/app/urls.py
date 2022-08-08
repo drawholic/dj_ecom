@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import MainView, RegisterView, ProfileView, ProductsView, ProductDetailView, CartView, DeleteOrderView, \
-         CategoryView
+         CategoryView, ImageHandleView
 from rest_framework.authtoken.views import obtain_auth_token
 from .models import Category
 
@@ -12,7 +12,7 @@ category_url = [
 
 urlpatterns = [
         # path('', include(category_url)),
-
+        path('image', ImageHandleView.as_view()),
         path('', MainView.as_view()),
         path('<str:category>', CategoryView.as_view()),
         path('token/', obtain_auth_token),

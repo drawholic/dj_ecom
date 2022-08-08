@@ -18,7 +18,16 @@ class UserSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('title', 'description', 'price', 'owner', 'img_url', 'id')
+        fields = ('title', 'description', 'price', 'owner', 'image', 'id')
+
+    def create(self, validated_data):
+
+        data = {}
+        for key in validated_data.keys():
+            data[key] = validated_data[key]
+        product = Product(**data)
+        product.save()
+        return product
 
 
 class OrderSerializer(serializers.ModelSerializer):

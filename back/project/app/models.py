@@ -18,7 +18,7 @@ class Product(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     price = models.FloatField()
-    img_url = models.URLField()
+    image = models.FileField(upload_to='product_images', default='')
     category = models.ManyToManyField(Category)
 
     def __str__(self):

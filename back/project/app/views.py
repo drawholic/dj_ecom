@@ -1,11 +1,30 @@
 from rest_framework import generics, views, viewsets, permissions
 from rest_framework.response import Response
+from rest_framework.request import Request
 from .serializers import UserSerializer, ProductSerializer, OrderSerializer, CategorySerializer
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from .models import Product, Order, Category
+from rest_framework.parsers import MultiPartParser, FileUploadParser
+from rest_framework import status
 
-# import numpy as np
+
+class ImageHandleView(views.APIView):
+    permission_classes = [permissions.IsAuthenticated, ]
+    parser_classes = (MultiPartParser, FileUploadParser)
+
+    def post(self, request:Request):
+        data = request.data.copy()
+        data['owner'] = request.user.id
+        serializer = ProductSerializer(data=data)
+
+        if serializer.is_valid():
+            print('pre save')
+            serializer.save()
+            print('post save')
+            return Response({'errors':serializer.errors, 'status': status.HTTP_201_CREATED})
+        else:
+            return Response({'errors':serializer.errors, 'status': status.HTTP_400_BAD_REQUEST})
 
 
 class MainView(views.APIView):
