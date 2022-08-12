@@ -19,9 +19,7 @@ class ImageHandleView(views.APIView):
         serializer = ProductSerializer(data=data)
 
         if serializer.is_valid():
-            print('pre save')
             serializer.save()
-            print('post save')
             return Response({'errors':serializer.errors, 'status': status.HTTP_201_CREATED})
         else:
             return Response({'errors':serializer.errors, 'status': status.HTTP_400_BAD_REQUEST})
@@ -40,9 +38,10 @@ class MainView(views.APIView):
 class CategoryView(generics.RetrieveAPIView):
     permission_classes = [permissions.AllowAny]
     serializer_class = CategorySerializer
+    queryset = Category.objects.all()
 
     def get(self, request, category:str, *args, **kwargs):
-        category = Category.objects.get(title=category.title())
+        category = Category.objects.get(title=request.path[1:])
         products = Product.objects.filter(category=category)
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
@@ -59,7 +58,6 @@ class ProductsView(viewsets.ModelViewSet):
         serializer = self.serializer_class(data=data, partial=True)
 
         if serializer.is_valid():
-            print(serializer.validated_data)
             serializer.save()
             return Response({'status': 201})
         else:
